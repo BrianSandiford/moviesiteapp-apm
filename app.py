@@ -1,5 +1,4 @@
-from datetime import datetime
-import time
+
 import requests
 from flask import Flask, render_template
 from  flask_sqlalchemy import SQLAlchemy 
@@ -9,13 +8,9 @@ app.config['DEBUG'] = True
 
 @app.route('/')
 def index():
-    url = 'http://worldtimeapi.org/api/timezone/America/{}'
-    city = 'Phoenix'
-    r = requests.get(url.format(city)).json()
-    # print(r)
-    date_time = r['datetime']
-    offset = r['utc_offset']
-    now = datetime.fromisoformat(date_time)
-    print(date_time)
-    print(now)
-    return "Hello World"
+    api_key = '20acf4f9f1a3d619ed2764b51dd7a2f1'
+    url = 'https://api.tmdb.org/3/discover/movie/?api_key='+api_key 
+    r = requests.get(url).json()
+    return  render_template('index.html', data=r['results'])
+
+
