@@ -28,7 +28,6 @@ def index():
     else:
       url = 'https://api.themoviedb.org/3/movie/popular?api_key={}'.format(api_key) +'&language=en-US&page=1'
       r = requests.get(url).json()
-    #print(r['results'])
     if not r['results']:
       return render_template('404.html'), 404
     else:
