@@ -6,6 +6,10 @@ from  flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 @app.route('/', methods=['GET','POST'])
 def index():
     api_key = '20acf4f9f1a3d619ed2764b51dd7a2f1'
@@ -20,6 +24,10 @@ def index():
     else:
       url = 'https://api.themoviedb.org/3/movie/popular?api_key={}'.format(api_key) +'&language=en-US&page=1'
       r = requests.get(url).json()
-    return  render_template('index.html', data=r['results'])
+    #print(r['results'])
+    if not r['results']:
+      return render_template('404.html'), 404
+    else:
+     return  render_template('index.html', data=r['results'])
 
 
