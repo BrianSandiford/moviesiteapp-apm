@@ -10,6 +10,10 @@ app.config['DEBUG'] = True
 def page_not_found(e):
     return render_template('404.html'), 404
 
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template('500.html'), 500
+
 @app.route('/', methods=['GET','POST'])
 def index():
     api_key = '20acf4f9f1a3d619ed2764b51dd7a2f1'
