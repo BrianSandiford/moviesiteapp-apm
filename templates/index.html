@@ -1,15 +1,7 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Movies Website</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
-</head>
-
-<body>
+{% block page_content %}
     <!-- css style here -->
     <style>
         body {
@@ -39,19 +31,16 @@
             max-width: 100%;
         }
     </style>
-
     <section>
+    
         <div class="movie-list-container">
             {% for movie in data %}
             <div class="movie-card">
-                <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" class="movie-poster">
-                <h2>{{movie.title}}</h2>
+                  <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" class="movie-poster">
+                  <h2>{{movie.title}}</h2>
             </div>
             {% endfor %}
         </div>
     </section>
-
-</body>
-
+{% endblock %}
 </html>
-© 2021 GitHub, Inc.
