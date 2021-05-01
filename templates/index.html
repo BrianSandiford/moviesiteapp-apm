@@ -1,15 +1,7 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Movies Website</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
-</head>
-
-<body>
+{% block page_content %}
     <!-- css style here -->
     <style>
         body {
@@ -39,27 +31,8 @@
             max-width: 100%;
         }
     </style>
-      <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-offset-4 is-4">
-                    <form method="POST">
-                        <div class="field has-addons">
-                            <div class="control is-expanded">
-                                <input class="input" name="movie_name" type="text" placeholder="Movie Name">
-                            </div>
-                            <div class="control">
-                                <button class="button is-info">
-                                    Search
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
     <section>
+    
         <div class="movie-list-container">
             {% for movie in data %}
             <div class="movie-card">
@@ -69,7 +42,5 @@
             {% endfor %}
         </div>
     </section>
-
-</body>
-
+{% endblock %}
 </html>
