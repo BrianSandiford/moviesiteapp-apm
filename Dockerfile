@@ -1,6 +1,12 @@
-FROM arm32v6/alpine:3.5
 
-RUN apk add --no-cache curl ca-certificates
-RUN apk add --no-cache python3 py3-pip
+FROM python:3.8-slim-buster
 
-CMD ["curl", "https://docker.com"]
+WORKDIR /app
+
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+
+#COPY templates/ .
+COPY . .
+
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
