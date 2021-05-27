@@ -30,7 +30,7 @@ node {
        
     }
     stage("Deploy") {
-            environment { 
+            //environment { 
                 GIT_AUTH = credentials('git-pass-credentials-ID') 
             
             //steps {
@@ -38,7 +38,7 @@ node {
                     rm -R -f moviesiteapp-helmcharts
                     git clone https://$GIT_AUTH_USR:$GIT_AUTH_PSW@github.com/BrianSandiford/moviesiteapp-helmcharts.git
                 ''')
-            }
+            //}
             dir("moviesiteapp-helmcharts"){
              sh('echo \$BUILD_NUMBER > example-\$.mdBUILD_NUMBER')
              sh "chmod +x changeTag.sh"
