@@ -30,4 +30,25 @@ node {
             } 
                 echo "Trying to Push Docker Build to DockerHub"
     }
+    stage("Deploy") {
+            environment { 
+                GIT_AUTH = credentials('git-pass-credentials-ID') 
+            }
+            steps {
+                sh('''
+                    rm -R -f moviesiteapp-helmcharts
+                    git clone https://$GIT_AUTH_USR:$GIT_AUTH_PSW@github.com/BrianSandiford/moviesiteapp-helmcharts.git
+                ''')
+            dir("moviesiteapp-helmcharts"){
+             sh('echo \$BUILD_NUMBER > example-\$BUILD_NUMBER.md')
+             sh "chmod +x changeTag.sh"
+             sh "./changeTag.sh $BUILD_NUMBER"
+             sh "git add ."
+             sh " git commit -am '[Jenkins CI] Add build file $BUILD_NUMBER.' "
+             sh " git remote show origin"
+             sh "git push -u origin master"
+            }
+            }
+            
+        }
 }
