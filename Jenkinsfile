@@ -31,7 +31,7 @@ node {
     }
     stage("Deploy") {
             //environment { 
-            withCredentials([GIT_AUTH(credentialsId: 'git-pass-credentials-ID', variable: 'GIT_AUTH_USR')]) {
+            withCredentials([usernameColonPassword(credentialsId: 'git-pass-credentials-ID', variable: 'GIT_AUTH_USR')]) {
             //GIT_AUTH = credentials('git-pass-credentials-ID') 
             
             //steps {
