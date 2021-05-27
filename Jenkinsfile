@@ -32,7 +32,7 @@ node {
     stage("Deploy") {
             environment { 
                 GIT_AUTH = credentials('git-pass-credentials-ID') 
-            
+            }
             //steps {
                 sh('''
                     rm -R -f moviesiteapp-helmcharts
@@ -46,7 +46,7 @@ node {
              sh " git commit -am '[Jenkins CI] Add build file $BUILD_NUMBER.' "
              sh " git remote show origin"
              sh "git push -u origin master"
-            }
+            
             //}
         } 
     }
