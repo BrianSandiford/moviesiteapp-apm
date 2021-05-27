@@ -29,18 +29,18 @@ node {
                 echo "Trying to Push Docker Build to DockerHub"
        
     }
-    stage("Deploy") {
-            //environment { 
+    stage("Deploy") {  
+        
             withCredentials([usernameColonPassword(credentialsId: 'git-pass-credentials-ID', variable: 'USERPASS')]) {
-            //GIT_AUTH = credentials('git-pass-credentials-ID') 
             
-            //steps {
+            
+         
             sh('''
                 rm -R -f moviesiteapp-helmcharts
                 git clone https://$USERPASS@github.com/BrianSandiford/moviesiteapp-helmcharts.git
                 ''')
                 }
-            //}
+         
             dir("moviesiteapp-helmcharts"){
              sh('echo \$BUILD_NUMBER > example-\$.mdBUILD_NUMBER')
              sh "chmod +x changeTag.sh"
@@ -50,7 +50,7 @@ node {
              sh " git remote show origin"
              sh "git push -u origin master"
             
-            //}
+          
         } 
     }
 }
