@@ -6,7 +6,7 @@ node {
 
         /* Cloning the Repository to our Workspace */
 
-        checkout sc
+        checkout scm
     }
 
     stage('Build image') {
