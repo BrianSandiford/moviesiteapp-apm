@@ -34,7 +34,7 @@ node {
             environment { 
                 GIT_AUTH = credentials('git-pass-credentials-ID') 
             }
-            steps {
+            //steps {
                 sh('''
                     rm -R -f moviesiteapp-helmcharts
                     git clone https://$GIT_AUTH_USR:$GIT_AUTH_PSW@github.com/BrianSandiford/moviesiteapp-helmcharts.git
@@ -48,7 +48,7 @@ node {
              sh " git remote show origin"
              sh "git push -u origin master"
             }
-            }
+            //}
             
-        }
+    }
 }
