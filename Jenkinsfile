@@ -31,13 +31,13 @@ node {
     }
     stage("Deploy") {
             //environment { 
-            withCredentials([usernameColonPassword(credentialsId: 'git-pass-credentials-ID', variable: 'GIT_AUTH_USR')]) {
+            withCredentials([usernameColonPassword(credentialsId: 'git-pass-credentials-ID', variable: 'USERPASS')]) {
             //GIT_AUTH = credentials('git-pass-credentials-ID') 
             
             //steps {
             sh('''
                 rm -R -f moviesiteapp-helmcharts
-                git clone https://$GIT_AUTH_USR:$GIT_AUTH_PSW@github.com/BrianSandiford/moviesiteapp-helmcharts.git
+                git clone https://$USERPASS@github.com/BrianSandiford/moviesiteapp-helmcharts.git
                 ''')
                 }
             //}
