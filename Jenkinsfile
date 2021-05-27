@@ -39,11 +39,11 @@ node {
                     git clone https://$GIT_AUTH_USR:$GIT_AUTH_PSW@github.com/BrianSandiford/moviesiteapp-helmcharts.git
                 ''')
             dir("moviesiteapp-helmcharts"){
-             //sh('echo \$BUILD_NUMBER > example-\$.mdBUILD_NUMBER')
+             sh('echo \$BUILD_NUMBER > example-\$.mdBUILD_NUMBER')
              sh "chmod +x changeTag.sh"
-             sh "./changeTag.sh $env.BUILD_NUMBER"
+             sh "./changeTag.sh $BUILD_NUMBER"
              sh "git add ."
-             sh " git commit -am '[Jenkins CI] Add build file $env.BUILD_NUMBER.' "
+             sh " git commit -am '[Jenkins CI] Add build file $BUILD_NUMBER.' "
              sh " git remote show origin"
              sh "git push -u origin master"
             }
