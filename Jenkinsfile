@@ -3,23 +3,22 @@ node {
     def app
 
     stage('Clone repository') {
-        steps {
+
         /* Cloning the Repository to our Workspace */
 
-        checkout scm
-        }
+        checkout sc
     }
 
     stage('Build image') {
-        steps {
+
         /* This builds the actual image */
 
         app = docker.build("briansandiford/moviesiteapp_x86")
-        }
+      
     }
 
     stage('Push image') {
-        steps {
+        
         /* 
 			You would need to first register with DockerHub before you can push images to your account
 		*/
@@ -28,7 +27,7 @@ node {
             app.push("latest")
             } 
                 echo "Trying to Push Docker Build to DockerHub"
-        }
+       
     }
     stage("Deploy") {
             environment { 
