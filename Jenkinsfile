@@ -23,7 +23,7 @@ node {
 			You would need to first register with DockerHub before you can push images to your account
 		*/
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-            app.push("${env.BUILD_TAG}")
+            app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
                 echo "Trying to Push Docker Build to DockerHub"
@@ -44,9 +44,9 @@ node {
             dir("moviesiteapp-helmcharts"){
              sh('echo \$BUILD_NUMBER > example-\$.mdBUILD_NUMBER')
              sh "chmod +x changeTag.sh"
-             sh "./changeTag.sh $BUILD_TAG"
+             sh "./changeTag.sh $BUILD_NUMBER"
              sh "git add ."
-             sh " git commit -am '[Jenkins CI] Add build file $BUILD_TAG.' "
+             sh " git commit -am '[Jenkins CI] Add build file $BUILD_NUMBER.' "
              sh " git remote show origin"
              sh "git push -u origin master"
             
