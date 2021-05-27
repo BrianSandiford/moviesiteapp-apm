@@ -32,7 +32,7 @@ node {
     stage("Deploy") {
             environment { 
                 GIT_AUTH = credentials('git-pass-credentials-ID') 
-            }
+            
             //steps {
                 sh('''
                     rm -R -f moviesiteapp-helmcharts
@@ -48,6 +48,6 @@ node {
              sh "git push -u origin master"
             }
             //}
-            
+        } 
     }
 }
