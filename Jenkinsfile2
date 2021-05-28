@@ -17,7 +17,7 @@ node {
       
     }
     withEnv(['registryCredentials=nexus-registry',
-             'registry=ec2-3-135-206-2.us-east-2.compute.amazonaws.com:8083/']) {
+             'registry=3.135.206.2:8081:8083/']) {
      stage('Push image') {
         
           /* 
