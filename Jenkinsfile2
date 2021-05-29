@@ -13,7 +13,7 @@ node {
 
         /* This builds the actual image */
 
-        app = docker.build("moviesiteapp_x86")
+        app = docker.build("3.12.74.207:8083/moviesiteapp")
       
     }
     withEnv(['registryCredentials=nexus-registry',
