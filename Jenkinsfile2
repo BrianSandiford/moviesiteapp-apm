@@ -13,11 +13,11 @@ node {
 
         /* This builds the actual image */
 
-        app = docker.build("18.189.170.108::8083/moviesiteapp")
+        app = docker.build("18.189.170.108:8083/moviesiteapp")
       
     }
     withEnv(['registryCredentials=nexus-registry',
-             'registry=18.189.170.108::8083/']) {
+             'registry=18.189.170.108:8083/']) {
      stage('Push image') {
         
           /* 
