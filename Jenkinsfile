@@ -1,34 +1,33 @@
 node {
-    
     def app
-
-    stage('Clone repository') {
-
-        /* Cloning the Repository to our Workspace */
-
-        checkout scm
-    }
-
-    stage('Build image') {
-
-        /* This builds the actual image */
-
-        app = docker.build("briansandiford/moviesiteapp_x86")
+    //environment {
+    //    registry = "655895384845.dkr.ecr.us-east-2.amazonaws.com/docker-private-repoo"
+    //}
+   
+    
+        stage('Cloning Git') {
+            
+              checkout scm     
+            
+        }
+        // Building Docker images
+        stage('Building image') {
+            
+                script {
+                  dockerImage = docker.build "655895384845.dkr.ecr.us-east-2.amazonaws.com/docker-private-repo:"+env.BUILD_NUMBER
+        }
       
     }
-
-    stage('Push image') {
+      // Uploading Docker images into AWS ECR
+    stage('Pushing to ECR') {
+      
+         script {
+                sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 655895384845.dkr.ecr.us-east-2.amazonaws.com'
+                sh 'docker push 655895384845.dkr.ecr.us-east-2.amazonaws.com/docker-private-repo:'+env.BUILD_NUMBER
+         }
         
-        /* 
-			You would need to first register with DockerHub before you can push images to your account
-		*/
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-            } 
-                echo "Trying to Push Docker Build to DockerHub"
-       
-    }
+      }
+    
     stage("Deploy") {  
         
             withCredentials([usernameColonPassword(credentialsId: 'git-pass-credentials-ID', variable: 'USERPASS')]) {
@@ -52,5 +51,59 @@ node {
             
           
         } 
+    }  
+}node {
+    def app
+    //environment {
+    //    registry = "655895384845.dkr.ecr.us-east-2.amazonaws.com/docker-private-repoo"
+    //}
+   
+    
+        stage('Cloning Git') {
+            
+              checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/BrianSandiford/moviesiteapp.git']]])     
+            
+        }
+        // Building Docker images
+        stage('Building image') {
+            
+                script {
+                  dockerImage = docker.build "655895384845.dkr.ecr.us-east-2.amazonaws.com/docker-private-repo:"+env.BUILD_NUMBER
+        }
+      
     }
+      // Uploading Docker images into AWS ECR
+    stage('Pushing to ECR') {
+      
+         script {
+                sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 655895384845.dkr.ecr.us-east-2.amazonaws.com'
+                sh 'docker push 655895384845.dkr.ecr.us-east-2.amazonaws.com/docker-private-repo:'+env.BUILD_NUMBER
+         }
+        
+      }
+    
+    stage("Deploy") {  
+        
+            withCredentials([usernameColonPassword(credentialsId: 'git-pass-credentials-ID', variable: 'USERPASS')]) {
+            
+            
+         
+            sh('''
+                rm -R -f moviesiteapp-helmcharts
+                git clone https://$USERPASS@github.com/BrianSandiford/moviesiteapp-helmcharts.git
+                ''')
+                }
+         
+            dir("moviesiteapp-helmcharts"){
+             sh('echo \$BUILD_NUMBER > example-\$.mdBUILD_NUMBER')
+             sh "chmod +x changeTag.sh"
+             sh "./changeTag.sh $BUILD_NUMBER"
+             sh "git add ."
+             sh " git commit -am '[Jenkins CI] Add build file $BUILD_NUMBER.' "
+             sh " git remote show origin"
+             sh "git push -u origin master"
+            
+          
+        } 
+    }  
 }
