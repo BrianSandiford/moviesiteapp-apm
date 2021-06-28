@@ -15,9 +15,10 @@ Implementation works with Linux.
 * Python >= 3.7.3
 * Instructions on creating virtual environments  can be found [here](https://docs.python.org/3/tutorial/venv.html)
 
-##Basic Build Instructions
+## Basic Build Instructions
 1. Clone this repo and change to directory.
 2. To install a virtual environment, run this command: `sudo apt install python3-venv`
-
+3. install venv: `sudo python3 -m venv venv`
+4. Activate our virtual environment  `. venv/bin/activate`
 
 
