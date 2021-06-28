@@ -1,10 +1,5 @@
 node {
     def app
-    //environment {
-    //    registry = "655895384845.dkr.ecr.us-east-2.amazonaws.com/docker-private-repoo"
-    //}
-   
-    
         stage('Cloning Git') {
             
               checkout scm     
