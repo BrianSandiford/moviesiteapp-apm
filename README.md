@@ -10,6 +10,11 @@ App created in python/flask.Webpages rendered using HTML CSS and Jinja2 2 templa
 ## Supported Operated Systems
 Implementation works with Linux.
 
+## Dependencies for Running Locally
+* pip 18.1
+* Python >= 3.7.3
+*  
+
 
 
 
