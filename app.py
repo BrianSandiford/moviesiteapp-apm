@@ -1,9 +1,10 @@
-
+import os
 import requests
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
+
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -15,7 +16,7 @@ def page_not_found(e):
 
 @app.route('/', methods=['GET','POST'])
 def index():
-    api_key = '20acf4f9f1a3d619ed2764b51dd7a2f1'
+    api_key =  os.getenv('SECRET_KEY')
     if request.method == 'POST' :
         movie_name = request.form.get('movie_name')
         if movie_name:
