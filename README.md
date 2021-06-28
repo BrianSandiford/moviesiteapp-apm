@@ -29,6 +29,7 @@ Implementation works with Linux.
 
 ## Docker
 `$ docker build -t moviesiteapp .`
+
 `$ docker run -d -p 5000:5000  moviesiteapp`
 
 
