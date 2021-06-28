@@ -17,7 +17,7 @@ Implementation works with Linux.
 
 ##Basic Build Instructions
 1. Clone this repo and change to directory.
-2. To install a virtual environment, run this command: *sudo apt install python3-venv*
+2. To install a virtual environment, run this command: `sudo apt install python3-venv`
 
 
 
