@@ -13,7 +13,7 @@ Implementation works with Linux.
 ## Dependencies for Running Locally
 * pip 18.1
 * Python >= 3.7.3
-*  
+* Instructions on creating virtual environments  can be found [here](https://docs.python.org/3/tutorial/venv.html)
 
 
 
