@@ -3,7 +3,7 @@ echo "#moviesiteapp" >> README.md
 ## Movie site app
 
 Site that displays the most popular movies and allows one to search for a movie by entering the name in a search bar.
-App created in python/flask.Webpages rendered using HTML CSS and Jinja2 2 templating 
+App created in python/flask.Webpages rendered using HTML CSS and Jinja2 2 templating.App uses TheMovieDB API for searching for and displaying information about movies   https://developers.themoviedb.org/3/getting-started/introd 
 
 ![Project Name](https://user-images.githubusercontent.com/67350852/123563921-4dc04300-d785-11eb-87a3-7369ae234e4a.gif)
 
