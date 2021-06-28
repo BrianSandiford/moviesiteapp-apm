@@ -27,6 +27,11 @@ Implementation works with Linux.
 1.  Assign our app.py script to a variable called FLASK_APP `export FLASK_APP=app.py`
 2.  `flask run --host=0.0.0.0` This will allow you to access the app fom within your network.You can access the app using the IP address of your device(Raspberry pi in this case).IP address in this case was http://192.168.1.49:5000/
 
+## Docker
+`$ docker build -t moviesiteapp .`
+`$ docker run -d -p 5000:5000  moviesiteapp`
+
+
 
 
 
