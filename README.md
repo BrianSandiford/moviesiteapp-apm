@@ -7,6 +7,7 @@ App created in python/flask.Webpages rendered using HTML CSS and Jinja2 2 templa
 
 ![Project Name](https://user-images.githubusercontent.com/67350852/123563921-4dc04300-d785-11eb-87a3-7369ae234e4a.gif)
 
+
 ## Supported Operating Systems
 Implementation works with Linux.
 
@@ -21,6 +22,12 @@ Implementation works with Linux.
 3. install venv: `sudo python3 -m venv venv`
 4. Activate our virtual environment  `. venv/bin/activate`
 5. Install requirements: `pip install -r requirements.txt`
+
+## Running the application
+1.  Assign our app.py script to a variable called FLASK_APP `export FLASK_APP=app.py`
+2.  `flask run --host=0.0.0.0` This will allow you to access the app fom within your network.You can access the app using the IP address of your device(Raspberry pi in this case).IP address in this case was http://192.168.1.49:5000/
+
+
 
 
 
