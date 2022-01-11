@@ -4,12 +4,12 @@ from flask import Flask, render_template, request
 from elasticapm.contrib.flask import ElasticAPM
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
+#app.config['DEBUG'] = True
 
 app.config['ELASTIC_APM'] = {
           'SERVICE_NAME': 'FlaskApp',
           'SECRET_TOKEN': '',         
-          'SERVER_URL': 'ec2-3-143-0-67.us-east-2.compute.amazonaws.com:8200'
+          'SERVER_URL': 'http://localhost:8200'
 }
 apm = ElasticAPM(app)
 
@@ -42,3 +42,5 @@ def index():
      return  render_template('index.html', data=r['results'])
 
 
+if __name__ == '__main__':   
+ app.run(host='0.0.0.0', port=5000)
