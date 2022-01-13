@@ -1,7 +1,21 @@
 import os
 import requests
+import logging
+import logging.config
 from flask import Flask, render_template, request
 from elasticapm.contrib.flask import ElasticAPM
+from pythonjsonlogger import jsonlogger
+from datetime import datetime
+
+class ElkJsonFormatter(jsonlogger.JsonFormatter):
+    def add_fields(self, log_record, record, message_dict):
+        super(ElkJsonFormatter, self).add_fields(log_record, record, message_dict)
+        log_record['@timestamp'] = datetime.now().isoformat()
+        log_record['level'] = record.levelname
+        log_record['logger'] = record.name
+
+logging.config.fileConfig('logging.conf')
+logger = logging.getLogger("MainLogger")
 
 app = Flask(__name__)
 #app.config['DEBUG'] = True
@@ -23,6 +37,11 @@ def page_not_found(e):
 
 @app.route('/', methods=['GET','POST'])
 def index():
+    app.logger.debug("debug")
+    app.logger.info("info")
+    app.logger.warning("warning")
+    app.logger.error("error")
+    app.logger.critical("critical")
     # api_key =  os.getenv('SECRET_KEY')
     api_key =  '20acf4f9f1a3d619ed2764b51dd7a2f1'
     if request.method == 'POST' :
