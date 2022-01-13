@@ -18,7 +18,6 @@ logging.config.fileConfig('logging.conf')
 logger = logging.getLogger("MainLogger")
 
 app = Flask(__name__)
-#app.config['DEBUG'] = True
 
 app.config['ELASTIC_APM'] = {
           'SERVICE_NAME': 'FlaskApp',
